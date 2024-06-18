@@ -1,0 +1,67 @@
+{% extends "../layouts/base.html" %}
+
+{% load static %}
+
+{% block container %}
+    <main>
+        <section class="container-fluid" style="background-color: #800000;">
+            <div class="container">
+                <h1 class="p-5 text-white display-2" data-aos="fade-right" >Validez votre achat .</h1>
+            </div>
+        </section>
+        <section class="container p-5" id="commadeSection" >
+                <form action="{% url 'procedureStripe' %}" method="post" class="p-2">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h2 class="p-2">Détail client</h2>
+                            <div class="bg-white p-4 rounded-2">
+                                <label for="pseudo" class="p-2 fw-bold">Pseudo </label>
+                                <input type="text" name="pseudo_commande" id="pseudo" class="form-control form-control-lg"  value="{{ user.username }}" readonly>
+                                <div class="row d-flex">
+                                    <div class="col-md-6 col-sm-6">
+                                        <div>
+                                            <label for="nom" class="p-2 fw-bold">Nom </label>
+                                            <input type="text" name="nom_commande" id="nom" class="form-control form-control-lg" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div>
+                                            <label for="prenom" class="p-2 fw-bold">Prenom </label>
+                                            <input type="text" name="prenom_commande" id="prenom" class="form-control form-control-lg" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <label for="adresse" class="p-2 fw-bold">Addresse </label>
+                                <input type="text" name="adresse_commande" id="adresse" class="form-control form-control-lg" required>
+                                <label for="telephone" class="p-2 fw-bold">Telephone </label>
+                                <input type="text" name="telephone_commande" id="telephone" class="form-control form-control-lg" required>
+                                <label for="note" class="p-2 fw-bold">Note </label>
+                                <textarea name="note_client" id="note" cols="30" rows="5" class="form-control" placeholder="Donner des informations spécifiques ..."></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h2 class="p-2">Votre Commande</h2>
+                            <div class="bg-white rounded-2 p-4">
+                                <label for="nbArticle" class="p-2 fw-bold">Articles </label>
+                                <input type="text" name="nbArticle_commande" id="nbArticle" class="form-control form-control-lg" value="{{ nbArticle }}" readonly>
+                                <label for="sommeTotal" class="p-2 fw-bold">Somme Total (en Ar) </label>
+                                <input type="text" name="sommeTotal_commande" id="sommeTotal" class="form-control form-control-lg"  value="{{ totalSomme }}" readonly>
+                                <h4 class="text-center mt-4">Payements</h4>
+                                <a href="">
+                                    <button class="btn btn-success btn-lg form-control mb-3" type="submit">
+                                        <i class="fa-brands fa-stripe-s"></i>
+                                        Stripe
+                                    </button>
+                                </a>
+                            </div>
+                            <div class="mt-3 bg-white rounded-2 p-5">
+                                <h3 class="text-center"><span class="fs-1">Merci <i class="fa-regular fa-face-smile-beam"></i></span> <br> de soutenir l'économie Malagasy</h3>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+        </section>
+    </main>
+{% endblock container %}
+    

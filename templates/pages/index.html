@@ -1,0 +1,175 @@
+{% extends '../layouts/base.html' %}
+
+{% load static %}
+{% block container %}
+    <main>
+        <section class="container-fluid p-4" id="SectionHome1">
+            <div class="container p-3">
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="text-center p-5">
+                            <h1 class="display-4 text-white p-1">ArtiMada. <br> Produits Artisanaux locaux</h1>
+                            <p class="text-white p-2 pt-5 fw-bold">Explorez la richesse et la diversité de l'art malagasy à travers nos collections unique , authentique et inspirantes.</p>
+                            <a href="{% url 'produits' %}">
+                                <button class="btn fw-bold btn-lg btnStyle1 rounded-5 mt-3" data-aos="fade-up"><i class="fa-regular fa-eye p-2"></i>Voir Tous</button>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div id="IndexCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                              <div class="carousel-item active">
+                                <img src="{% static 'img/img1.jpg' %}" class="img-fluid shadow-lg" alt="" style="border-top-left-radius: 50%;" data-aos="zoom-in" >
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{% static 'img/img2.jpg' %}" class="img-fluid shadow-lg" alt="" style="border-top-left-radius: 50%;" data-aos="zoom-in" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="container p-5">
+            <h1 class="text-center pb-2" data-aos="fade-up" >Les dernières pépites à découvrir</h1>
+            <div class="row">
+                {% for produits in recent_product %}
+                    <div class="col-md-3 col-sm-6" data-aos="flip-left" >
+                        <a href="{% url 'show' produits.id %}" style="text-decoration: none;">
+                            <div class="card m-4 bg-transparent border-0">
+                                <img src="../{{ produits.image }}" alt="" class="img-fluid rounded-circle">
+                                <h4 class="card-title text-white text-center mt-3">{{ produits.nom }}</h4>
+                            </div>
+                        </a>
+                    </div>
+            {% empty %}
+                <h1 class="display-6 text-warning text-center" style="font-weight: bold;">Pas d'article ajouter récement .</h1>
+            {% endfor %}
+            </div>
+            <p class="text-center">
+                <a href="{% url 'produits' %}">
+                    <button class="btn btnStyle2 fw-bold btn-lg rounded-5 mt-3" data-aos="fade-up" ><i class="fa-regular fa-eye p-2"></i>
+                        Voir Tous</button>
+                </a>
+            </p>
+        </section>
+        <section class="container-fluid p-5 bg-white" id="SectionInscription">
+            {% if user.is_authenticated %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="{% static 'img/Femme.jpg' %}" alt="" class="img-fluid mt-4 rounded-4" data-aos="fade-right" >
+                    </div>
+                    <div class="col-md-6 mt-5">
+                        <div class="shadow-lg p-4 rounded-5" style="background-color: #800000;">
+                            <h1 class="text-center">Authentique</h1>
+                            <h2 class="text-center">100 % fait main à Madagasikara</h2>
+                            <h2 class="text-center">Nos meillieurs artisans</h2>
+                            <h2 class="text-center">Protéger la richesse culturel de notre pays</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+                <div class="container">
+                    <h1 class="text-center pb-5">Formulaire d'inscription</h1>
+                <div class="row">
+                    <div class="col-md-5">
+                        <div id="formulaireCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                              <div class="carousel-item active">
+                                <img src="{% static 'img/formCarousel/1.jpg' %}" alt="" class="img-fluid" style="height: 550px;width: 100%;">
+                              </div>
+                              <div class="carousel-item">
+                                <img src="{% static 'img/formCarousel/2.jpg' %}" alt="" class="img-fluid">
+                              </div>
+                              <div class="carousel-item">
+                                <img src="{% static 'img/formCarousel/3.jpg' %}" class="img-fluid" style="height: 550px;width: 100%;">
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="ps-3" data-aos="zoom-in-left" >
+                            <form action="{% url 'creat_user' %}" method="post" enctype="multipart/form-data">
+                                {% if message %}
+                                    <h2 class="text-success text-center m-3">{{ message }}</h2>
+                                {% endif %}
+                                {% if error_message %}
+                                    <h2 class="text-warning text-center m-3">{{ error_message }}</h2>
+                                {% endif %}
+                                {% csrf_token %}
+                                <label class="fs-4" for="pseudo">Pseudo :</label><br>
+                                <input type="text" id="pseudo" name="pseudo" class="form-control mt-1 mb-1" placeholder="madartisan09" required>
+                                <label class="fs-4" for="email">Email :</label><br>
+                                <input type="email" id="email" name="email" class="form-control  mt-1 mb-1" placeholder="artisan@gmail.com" required>
+                                <label for="password" class="m-2 fs-4">Mot de passe :</label>
+                                <input type="password" id="password" name="password" class="form-control form-control-sm" placeholder="..." minlength="8" required>
+                                <label for="password_conf" class="m-2 fs-4">Confirmation de mot de passe</label>
+                                <input type="password" id="password_conf" name="password_conf" class="form-control form-control-sm" placeholder="..." minlength="8" required>
+                                <label class="fs-4" for="groupe">Groupe :</label><br>
+                                <select name="groupe" id="groupe" class="form-select mt-1 mb-1">
+                                    {% for group in groups %}
+                                        <option value="{{ group.id }}">{{ group.name }}</option>
+                                    {% endfor %}
+                                </select>
+                                <label class="fs-4" for="photo">Photo de couverture :</label><br>
+                                <input type="file" name="myphoto" id="photo" class="form-control mt-1 mb-1" required>
+                                <button type="submit" class="btn btn-lg btn-warning mt-3">
+                                    <i class="fa-solid fa-user-plus p-2"></i>
+                                    S'inscrire</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            {% endif %}
+        </section>
+        <section class="container-fluid p-3" style="background-color: #bd5520;">
+            <h1 class="text-center p-4" data-aos="fade-up" >Extraits de nos produits</h1>
+            <div class="container">
+                <div class="row">
+                    {% for produits in produitPartiel %}
+                        <div class="col-md-3 col-sm-6" data-aos="flip-left" >
+                            <a href="{% url 'show' produits.id %}" style="text-decoration: none;">
+                                <div class="card m-4 bg-transparent border-0">
+                                    <img src="../{{ produits.image }}" alt="" class="img-fluid rounded-circle">
+                                    <h4 class="card-title text-white text-center mt-3">{{ produits.nom }}</h4>
+                                </div>
+                            </a>
+                        </div>
+                {% empty %}
+                    <h1 class="display-6 text-warning text-center" style="font-weight: bold;">Le catallogue est encore en cours de preparation .</h1>
+                {% endfor %}
+                </div>
+                <p class="text-center">
+                    <a href="{% url 'produits' %}">
+                        <button class="btn btnStyle2 fw-bold btn-lg rounded-5 mt-3" data-aos="fade-up" ><i class="fa-regular fa-eye p-2"></i>Voir Tous</button>
+                    </a>
+                </p>
+            </div>
+        </section>
+        <section class="container-fluid p-5 mt-2">
+            <h1 class="text-center fs-1 p-3 pb-5" data-aos="fade-up" >Notre meilleur suggestion</h1>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="shadow-lg rounded-2">
+                            <img src="{% static 'img/tableau.jpg' %}" class="img-fluid" data-aos="flip-down" >
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div>
+                            <p>
+                                Ce tableau capture un instant paisible au cœur de Madagascar, où la nature et la culture se rencontrent harmonieusement. En premier plan, deux zébus majestueux se tiennent côte à côte, symbolisant la force et la résilience de la vie rurale malagasy. Leurs cornes imposantes et leurs yeux tranquilles racontent une histoire de labeur et de coexistence avec la nature, éléments essentiels de la vie quotidienne sur l'île. <br><br>
+                                
+                                Derrière eux, un immense baobab s'élève vers le ciel, ses branches noueuses et son tronc robuste dominant le paysage. Cet arbre iconique, souvent appelé "l'arbre à l'envers" en raison de ses branches qui ressemblent à des racines, est une représentation parfaite de la sagesse et de la longévité. Le baobab, avec ses dimensions impressionnantes et sa silhouette unique, est non seulement un trésor botanique mais aussi un symbole spirituel profondément ancré dans les traditions locales. <br><br>
+                                
+                                À l'horizon, le soleil couchant diffuse une lumière dorée, enveloppant la scène d'une chaleur douce et réconfortante. Les rayons solaires se faufilent entre les branches du baobab, créant un jeu d'ombres et de lumières qui accentue la beauté naturelle du paysage. Ce coucher de soleil, avec ses teintes oranges et pourpres, évoque une fin de journée sereine, marquant le rythme apaisant de la vie à Madagascar. Chaque élément, des zébus au baobab en passant par le soleil couchant, raconte une part de l'histoire malagasy, offrant au spectateur un aperçu de la beauté et de la profondeur de cette île extraordinaire.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>    
+{% endblock container %}
+    

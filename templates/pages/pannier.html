@@ -1,0 +1,124 @@
+{% extends "../layouts/base.html" %}
+
+{% load static %}
+
+{% block container %}
+<main>
+    <section class="container-fluid" style="background-color: #800000;">
+        <div class="container">
+            <h1 class="p-5 text-white display-2" data-aos="fade-right" >Votre panier est prêt.</h1>
+        </div>
+    </section>
+    <div class="untree_co-section before-footer-section">
+        <div class="container">
+          <div class="row mb-5">
+            <form class="col-md-12" method="post">
+              <div class="site-blocks-table">
+                {% if request.session.pannier is None %}
+                    <div class="p-5">
+                        <p class="text-center">
+                            <i class="fa-solid fa-cart-plus fa-7x p-5"></i>
+                        </p>
+                        <h3 class="text-center">Pourquoi votre pannier est encore vide ?</h3>
+                        <h4 class="text-center">
+                            <a href="{% url 'produits' %}#catallogue " class="link-danger">Allez voir nos articles</a>
+                        </h4>
+                    </div>
+                {% else %}
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th class="product-thumbnail">Image</th>
+                        <th class="product-name">Article</th>
+                        <th class="product-price">Prix</th>
+                        <th class="product-quantity">Quantitée</th>
+                        <th class="product-remove">Retirer</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% if 'pannier' in request.session %}
+                          {% for produit in request.session.pannier %}
+                              <tr>
+                                  <td>
+                                      <img src="../{{ produit.image }}" class="img-fluid rounded-1" width="150" height="150" alt="">
+                                  </td>
+                                  <td><h5>{{ produit.nom }}</h5></td>
+                                  <td class="prix"><h5>{{ produit.prix }}</h5></td>
+                                  <td>
+                                      <div class="input-group mb-3 d-flex align-items-center quantity-container">
+                                          <input type="number" id="qtt" class="form-control text-center quantity-amount" max="{{ produit.stock }}" value="1" min="1">
+                                        </div>
+                                  </td>
+                                  <td>
+                                      <a href="{% url 'remove' produit.id_produit %}" class="btn btn-danger">
+                                          <i class="fa fa-trash fa-2x"></i>
+                                      </a>
+                                  </td>
+                              </tr>
+                          {% empty %}
+                              <div class="p-3">
+                                <p class="text-center">
+                                    <i class="fa-regular fa-face-sad-tear fa-10x p-5"></i>
+                                </p>
+                                <h1 class="display-3 text-center" style="font-weight: bold;">Votre pannier a été vider .</h1>
+                              </div>
+                          {% endfor %}
+                      {% endif %}
+              </tbody>
+                </table>
+                {% endif %}
+              </div>
+            </form>
+            {% if request.session.pannier is None %}
+              
+            {% else %}
+            <div class="pt-4 pb-5">
+                <div class="row">
+                    <div class="col-md-8 col-sm-12">
+                        <h3 class="text-center">Nombre d'arcticle dans le pannier : {{ request.session.pannier | length }}</h3>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="bg-white rounded-4 pb-2">
+                            <form action="{% url 'commander' %}" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <h3 class="text-center p-2">Total (en Ar)</h3>
+                                <p class="text-center">
+                                    <input type="number" value="{{ request.session.pannier | length }}" class="text-center" name="nbArticle" hidden>
+                                    <input class="total border-0 text-center align-items-center fs-3 opacity-100 fw-bold form-control" name="totalSomme"  readonly>
+                                </p>
+                                <p class="text-center">
+                                    <button class="btn btn-success btn-lg mt-2" type="submit">
+                                        <i class="fa-solid fa-truck-fast p-2"></i>
+                                        Passer commande
+                                    </button>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            
+          </div>
+</main>
+<script>
+    function total(){
+        let prix = document.querySelectorAll(".prix")
+        let total = document.querySelector('.total')
+        let number = document.querySelectorAll('#qtt')
+        let data = []
+
+        prix.forEach(e =>{
+            data.push(parseInt(e.textContent))
+        })
+        let somme = 0
+        data.forEach((e,i)=>{
+            somme += e*parseInt(number[i].value)
+        })
+        total.value=`${somme}`
+        return somme;
+    }
+    setInterval(total,100)
+</script>
+{% endblock container %}
+    

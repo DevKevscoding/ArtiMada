@@ -1,0 +1,25 @@
+{% extends "../layouts/base.html" %}
+
+{% load static %}
+
+{% block container %}
+<main>
+    <section class="container-fluid" style="background-color: #800000;">
+        {% if error %}
+            {{ error }}
+        {% endif %}
+        <div class="container">
+            <h1 class="p-5 text-white display-2" data-aos="fade-right" >Merci pour votre commande.</h1>
+        </div>
+    </section>
+    <section class="container p-5">
+        <div class="text-center p-5">
+            <i class="fa-solid fa-truck-fast fa-7x p-3" style="color: #800000;"></i>
+            <h1 class="p-3 display-1">Merci beaucoup !</h1>
+            <h5 >Votre commande a été executer avec success .<i class="fa-regular fa-face-smile-beam"></i></h5>
+        </div>
+    </section>
+</main>
+    
+{% endblock container %}
+    

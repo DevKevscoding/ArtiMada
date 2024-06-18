@@ -1,0 +1,107 @@
+{% extends '../layouts/base.html' %}
+
+{% load static %}
+{% block container %}
+<main>
+    <section class="container-fluid p-4" id="SectionAjout1">
+        <div class="container p-3">
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="text-center p-4">
+                        <h1 class="display-4 text-white p-1">Mise en ligne. <br> L'art malagasy en ligne</h1>
+                        <p class="text-white p-2 pt-5 fw-bold">Restez à jour avec nos dernieres créations et collections , mises en ligne régulièrement pour offrir des nouveautés et des inspirations artistiques avec nos articles inedits.</p>
+
+                        <a href="{% url 'produits' %}">
+                            <button class="btn btnStyle1 fw-bold btn-lg rounded-5 mt-3" data-aos="fade-up" ><i class="fa-regular fa-eye p-2"></i>Voir tous</button>
+                        </a>
+
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div>
+                        <img src="{% static 'img/img2.jpg' %}" class="img-fluid shadow-lg" alt="" style="border-top-left-radius: 50%;" data-aos="zoom-in" >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="container mt-5 mb-5 pb-3 pt-3 shadow-lg rounded-2 bg-white" id="SectionAjout2" data-aos="flip-up" >
+        <h1 class="text-center pb-3">Formulaire d'ajout de produit dans le catalogue</h1>
+        <div>
+            <form action="{% url 'addProduit' %}" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+                {% if message %}
+                    <h1 class="text-center text-success">{{ message }}</h1>
+                {% elif error %}
+                    <h1 class="text-center text-warning">{{ error }}</h1>
+                {% endif %}
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="m-3">
+                            <label class="text-black fs-4" for="nom">Designation</label>
+                            <input type="text" class="form-control mb-2" id="nom" placeholder="Marmite" name="nomProduit" required>
+                            <label class="text-black fs-4" for="categorie">Categorie</label>
+                            <select name="categorie" class="form-select mb-2" id="categorie">
+                                {% for category in list_categorie %}
+                                    <option value="{{ category.type }}">{{ category.type }}</option>
+                                {% endfor %}
+                            </select>
+                            <label class="text-black fs-4" for="matériaux">Matériaux</label>
+                            <select name="materiaux" class="form-select mb-2" id="matériaux">
+                                {% for materiaux in list_materiaux %}
+                                    <option value="{{ materiaux.designation }}">{{ materiaux.designation }}</option>
+                                {% endfor %}
+                            </select>
+                            <input type="text" class="form-control mb-2" id="artisan" placeholder="Rakoto" name="artisan" value="{{ user.username }}" hidden required>
+                            <label class="text-black fs-4" for="lieu">Lieu</label>
+                            <input type="text" class="form-control mb-2" id="lieu" placeholder="Antananarivo" name="lieu" required>
+                            <label class="text-black fs-4" for="prix">Prix (en Ar)</label>
+                            <input type="number" class="form-control mb-2" id="prix" placeholder="5000" min="100" value="100" name="prix" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="m-3">
+                            <label class="text-black fs-4" for="stock">Stock (par piece)</label>
+                            <input type="number" class="form-control mb-2" id="stock" placeholder="25" name="stock" min="1" value="1" max="100" required>
+                            <label class="text-black fs-4" for="description">Description</label>
+                            <textarea name="description" id="description" cols="30" rows="5" class="form-control mb-2" placeholder="Une petite description ... "></textarea>
+                            <label class="text-black fs-4" for="image">Image</label>
+                            <input type="file" name="imageProduit" class="form-control" id="image" required>
+                            <button  type="submit" class="btn btn-success btn-lg mt-4">
+                                <i class="fa-solid fa-globe p-2"></i>
+                                Mise en ligne
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <section class="container-fluid p-5" id="SectionAjout3">
+        <h1 class="text-center text-white display-1 p-5" data-aos="zoom-in" >Disponible dès maintenant, <br> profitez-en.</h1>
+    </section>
+</main>
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+    'use strict'
+  
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+  
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+  
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+</script>
+{% endblock container %}
+    

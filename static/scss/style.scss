@@ -1,0 +1,129 @@
+@import 'mixins';
+
+@mixin background-image($image){
+    background-image: url($image);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+body{
+    header{
+        @include customNavbar();
+        nav{
+            ul{ 
+                li{
+                    a {
+                        text-decoration: none;
+                        -webkit-transition: .3s all ease;
+                        -o-transition: .3s all ease;
+                        transition: .3s all ease;
+                        color: #2f2f2f;
+                        text-decoration: underline; }
+                        a:hover {
+                          color: #2f2f2f;
+                          text-decoration: none; }
+                        a.more {
+                          font-weight: 600; }
+                }
+            }
+        }
+    }
+    #SectionConnexion{
+      @include background-image(("../img/connexion.jpg"))
+    }
+    main{
+        .btnStyle1{
+          background-color: white;
+          color: #000000;
+          transition: all 0.5s !important;
+          &:hover{
+            transition: all 0.5s !important;
+            color: white;
+            background-color: #800000;
+            border-radius: 10px !important;
+          }
+        }
+        .btnStyle2{
+          background-color: #800000;
+          color: white;
+          transition: all 0.5s !important;
+          &:hover{
+            transition: all 0.5s !important;
+            color: black;
+            background-color: white;
+            border-radius: 10px !important;
+          }
+        }
+        .btnStyle3{
+          background-color: #800000;
+          color: white;
+          transition: all 0.5s !important;
+          &:hover{
+            transition: all 0.5s !important;
+            color: #800000;
+            background-color: white;
+            border-radius: 10px !important;
+            border: 2px solid #800000;
+          }
+        }
+        background-color: #d7b99a;
+        #SectionHome1{
+            @include background-image("../img/Acceuil_01.jpg");
+        }
+        #SectionAjout1{
+            @include background-image("../img/Acceuil_01.jpg");
+        }
+        #SectionAjout3{
+            @include background-image("../img/img3A.jpg");
+        }
+        #SectionAjout3{
+            @include background-image("../img/img3A.jpg");
+        }
+        .card{
+            transition: all 0.4s;
+            cursor: pointer;
+            &:hover{
+                transform: scale(1.10);
+                img{
+                  border: 3px solid #800000;
+                }    
+            }
+        }
+        .site-blocks-table {
+            overflow: auto; }
+            .site-blocks-table .product-thumbnail {
+              width: 200px; }
+            .site-blocks-table .btn {
+              padding: 2px 10px; }
+            .site-blocks-table thead th {
+              padding: 30px;
+              text-align: center;
+              border-width: 0px !important;
+              vertical-align: middle;
+              color: rgba(0, 0, 0, 0.8);
+              font-size: 18px; }
+            .site-blocks-table td {
+              padding: 20px;
+              text-align: center;
+              vertical-align: middle;
+              color: rgba(0, 0, 0, 0.8); }
+            .site-blocks-table tbody tr:first-child td {
+              border-top: 1px solid #3b5d50 !important; }
+            .site-blocks-table .btn {
+              background: none !important;
+              color: #000000;
+              border: none;
+              height: auto !important; }
+          
+          .site-block-order-table th {
+            border-top: none !important;
+            border-bottom-width: 1px !important; }
+          
+          .site-block-order-table td, .site-block-order-table th {
+            color: #000000; }
+          
+          .couponcode-wrap input {
+            border-radius: 10px !important; }
+    }
+}

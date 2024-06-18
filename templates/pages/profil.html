@@ -1,0 +1,40 @@
+{% extends "../layouts/base.html" %}
+
+{% load static %}
+
+{% block container %}
+<main>
+    <section id="SectionProfil1" class="container-fluid" style="background-color: #800000;">
+        <div class="container">
+            <div class="p-5">
+                <h1 class="display-1 text-white p-5" style="border-left: 5px solid white;" data-aos="fade-right">
+                    Bienvenue : {{ user.username }}
+                </h1>
+            </div>
+        </div>
+    </section>
+    <section class="container p-5">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="mb-5">
+                    <img src="../{{user.profile.photo }}" alt="" class="rounded-5 shadow-lg img-fluid" data-aos="zoom-in">
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div style="background-color: white;" class="p-5 rounded-5 shadow-lg">
+                    <h1 class="text-center pb-4">Profil complet</h1>
+                    <h3>Pseudo : {{ user.username }}</h3>
+                    <h3>Email : {{user.profile.email}}</h3>
+                    <h3>Groupe : {{ user.profile.group }} {% if is_moderator %} ( Artisan )</h3>
+                    {% endif %}
+                    <h3>Créer le : {{ user.date_joined }}</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="container-fluid p-4" id="SectionAjout3">
+        <h2 class="text-center text-white display-1 p-5" data-aos="zoom-in" >Explorez nos pages et plangez dans l'univers malagasy.</h2>
+    </section>
+</main>
+{% endblock container %}
+    

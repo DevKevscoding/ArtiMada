@@ -1,0 +1,41 @@
+{% extends "../layouts/base.html" %}
+
+{% load static %}
+
+{% block container %}
+    <main>
+        <section class="container-fluid" style="background-color: #800000;">
+            <div class="container">
+                <h1 class="p-5 text-white display-2" data-aos="fade-right" >Vos favoris de l'art malagasy.</h1>
+            </div>
+        </section>
+        <section class="container pb-5">
+            <h1 class="text-center p-3">Vos favories : {{ list_favorie|length }} </h1>
+            <div class="container">
+                {% if message %}
+                    <h1 class="text-center p-3 text-bg-success">{{ message }}</h1>
+                {% elif error %}
+                    <h1 class="text-center p-3 text-warning">{{ error }}</h1>
+                {% endif %}
+                <div class="row">
+                    {% for produits in list_favorie %}
+                        <div class="col-md-3 col-sm-6" data-aos="flip-left">
+                            <a href="{% url 'show' produits.produit.id %}" style="text-decoration: none;">
+                                <div class="card m-4 bg-transparent border-0">
+                                    <img src="../{{ produits.produit.image }}" alt="" class="img-fluid rounded-circle">
+                                    <h4 class="card-title text-white text-center mt-3">{{ produits.produit.nom }}</h4>
+                                </div>
+                            </a>
+                        </div>
+                {% empty %}
+                    <p class="text-center">
+                        <i class="fa-solid fa-heart fa-10x "></i>
+                    </p>
+                    <h1 class="display-6 text-center" style="font-weight: bold;">Vous n'avez pas encore d'article favorie .</h1>
+                {% endfor %}
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock container %}
+    

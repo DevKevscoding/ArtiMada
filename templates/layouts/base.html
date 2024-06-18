@@ -1,0 +1,39 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArtiMade</title>
+    <link rel="icon" href="{% static 'img/tableau.jpg' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap-5.3.0/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fontawesome-free-6.4.0-web/css/all.css' %}">
+    <link rel="stylesheet" href="{% static 'css/tiny-slider.css' %}">
+    <link rel="stylesheet" href="{% static 'Aos\aos.css' %}">
+</head>
+<body>
+    {% include 'layouts/header.html' %}
+
+    
+    {% block container %}
+        
+    {% endblock container %}
+        
+
+    {% include "layouts/footer.html" %}
+
+    <script src="{% static 'bootstrap-5.3.0/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/tiny-slider.js' %}" ></script>
+    <script src="{% static 'js/main.js' %}" ></script>
+    <script src="{% static 'Aos/aos.js' %}"></script>
+    {% if debug %}
+        <script src="http://localhost:35729/livereload.js" ></script>      
+    {% endif %}
+    <script>
+        AOS.init();
+    </script>
+    
+</body>
+</html>

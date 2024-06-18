@@ -1,0 +1,83 @@
+{% extends "../layouts/base.html" %}
+
+{% load static %}
+
+{% block container %}
+<main>
+    <section class="container-fluid p-4" id="SectionAjout1">
+        <div class="container p-3">
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="text-center p-4">
+                        <h1 class="display-4 text-white p-1">Blog . <br>Histoires et actualités malagasy.</h1>
+                        <p class="text-white p-2 pt-5 fw-bold">Plongez dans l'univers de l'art malagasy avec nos articles, interviews,et reportages exclusifs sur les artistes , les cultures , les tendances actuelles et l'évolution del'art à Madagasikara et au-delà .</p>
+
+                        <a href="{% url 'produits' %}">
+                            <button class="btn btnStyle1 fw-bold btn-lg rounded-5 mt-3" data-aos="fade-up" ><i class="fa-regular fa-eye p-2"></i>Voir tous</button>
+                        </a>
+
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div id="IndexCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                          <div class="carousel-item active">
+                            <img src="{% static 'img/img1.jpg' %}" class="img-fluid shadow-lg" alt="" style="border-top-left-radius: 50%;" data-aos="zoom-in" >
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'img/img2.jpg' %}" class="img-fluid shadow-lg" alt="" style="border-top-left-radius: 50%;" data-aos="zoom-in" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="container">
+        <h1 class="text-center p-5" data-aos="fade-up" >Notre pays nos valeurs</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <div>
+                    <img src="{% static 'img/tiako.jpg' %}" alt="" class="img-fluid" data-aos="zoom-in-right" >
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div>
+                    <h2 class="text-center">Mes valeurs</h2>
+                    <p> 
+                        L'art malagasy est une expression profonde de notre culture et de notre histoire. Mon engagement repose sur la promotion de l'authenticité et des traditions locales. Chaque pièce sélectionnée est le fruit d'un savoir-faire ancestral, garantissant une qualité et une originalité uniques. Je m'assure que chaque produit raconte une histoire, celle de nos ancêtres et de leur passion pour l'art. <br><br>
+                        
+                        Je collabore directement avec les artisans malagasy, veillant à ce qu'ils reçoivent une rémunération juste et équitable. Mon objectif est de soutenir l'économie locale et de créer des opportunités durables pour ces créateurs talentueux. En valorisant leur travail, je contribue à la préservation de leur savoir-faire et à la transmission de leurs techniques aux générations futures. <br><br>
+                        
+                        Le respect de l'environnement est également au cœur de mes valeurs. J'encourage l'utilisation de matériaux durables et locaux, respectueux de notre écosystème. Les techniques traditionnelles souvent utilisées par les artisans favorisent une production écologique, minimisant l'impact environnemental. Par ailleurs, je m'efforce de sensibiliser et d'éduquer le public sur l'importance de préserver notre riche patrimoine culturel et naturel.
+                        
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="pt-5">
+                    <h2 class="text-center">Mon pays : Madagasikara</h2>
+                    <p>
+                        À travers chaque œuvre d'art malagasy, nous trouvons l'âme et l'histoire de Madagascar. Mon engagement est de promouvoir l'authenticité et de respecter les traditions locales. Chaque pièce est soigneusement choisie pour sa qualité et son lien avec les pratiques ancestrales, assurant ainsi une transmission fidèle de notre riche patrimoine culturel. En mettant en avant l'authenticité, je souhaite préserver et valoriser l'essence même de notre culture. <br><br>
+                        
+                        La collaboration avec les artisans locaux est une de mes priorités. Je travaille directement avec ces créateurs talentueux, en veillant à ce qu'ils reçoivent une rémunération équitable pour leur travail. Mon objectif est de soutenir l'économie locale et de créer des opportunités durables, permettant ainsi aux artisans de vivre de leur art et de continuer à transmettre leurs savoir-faire uniques. Leur travail est non seulement une source de revenus, mais aussi une fierté pour toute la communauté. <br><br>
+                        
+                        Le respect de l'environnement est également au cœur de mes préoccupations. J'encourage l'utilisation de matériaux locaux et durables, qui respectent notre écosystème unique. Les techniques traditionnelles employées par les artisans favorisent une production écologique, minimisant l'impact environnemental. En valorisant ces pratiques, nous contribuons à la préservation des ressources naturelles de Madagascar pour les générations futures. <br><br>
+                        
+                        Enfin, je m'efforce de sensibiliser et d'éduquer le public sur l'importance de notre patrimoine culturel. À travers mon blog, je partage des histoires, des techniques et des savoirs ancestraux, espérant ainsi enrichir la compréhension et l'appréciation de l'art malagasy. Mon engagement est de faire en sorte que la richesse culturelle de Madagascar soit reconnue et célébrée à travers le monde, tout en soutenant les communautés locales et en respectant notre environnement. <br></p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="pt-5">
+                    <img src="{% static 'img/Mada.png' %}" alt="" class="img-fluid" data-aos="zoom-in-left" >
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="container-fluid p-5 mt-5" id="SectionAjout3">
+        <h1 class="text-center text-white display-1 p-5" data-aos="zoom-in" >Culture et innovation en art .</h1>
+    </section>
+</main>
+{% endblock container %}
+    

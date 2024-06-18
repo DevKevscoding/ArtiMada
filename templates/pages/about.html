@@ -1,0 +1,126 @@
+{% extends "../layouts/base.html" %}
+
+{% load static %}
+
+{% block container %}
+<main>
+    <section class="container-fluid p-4" id="SectionAjout1">
+        <div class="container p-3">
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="text-center p-4">
+                        <h1 class="display-4 text-white p-1">A propos de nous . <br>Notre passion pour l'art malagasy.</h1>
+                        <p class="text-white p-2 pt-5 fw-bold">Passionnés par l'art et la culture malagasy, nous nous efforçons de partager cette richesse avec le monde à travers des articles authentiques et inspirantes.</p>
+
+                        <a href="{% url 'produits' %}">
+                            <button class="btn btnStyle1 fw-bold btn-lg rounded-5 mt-3" data-aos="fade-up" ><i class="fa-regular fa-eye p-2"></i>Voir tous</button>
+                        </a>
+                        
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div id="IndexCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                          <div class="carousel-item active">
+                            <img src="{% static 'img/img1.jpg' %}" class="img-fluid shadow-lg" alt="" style="border-top-left-radius: 50%;" data-aos="zoom-in" >
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'img/img2.jpg' %}" class="img-fluid shadow-lg" alt="" style="border-top-left-radius: 50%;" data-aos="zoom-in" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="p-3 mt-5 rounded-2">
+                    <div class="mb-5">
+                        <h1 data-aos="fade-up" >Pourquoi nous choisir ?</h1>
+                    <p>Découvrez l'excellence de l'art malagasy avec ArtiMada , ou l'enguagement envers la qualité , l'innovation constante et le servie client.</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 col-md-6">
+                            <div class="feature">
+                                <div class="icon">
+                                    <i class="fa-regular fa-circle-check fa-3x" data-aos="zoom-in" style="color: #800000;"></i>
+                                </div>
+                                <h3>Authenticité</h3>
+                                <p>Explorez l'essence pure de notre art,ou chaque création respire l'authenticit et la vérité artistique.</p>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-6">
+                            <div class="feature">
+                                <div class="icon">
+                                    <i class="fa-regular fa-gem fa-3x" data-aos="zoom-in" style="color: #800000;"></i>
+                                </div>
+                                <h3>Qualitée</h3>
+                                <p>Découvrez un univers ou la perfection artistique rencontre l'excellence , ou chaque détail est soigneusement façonné pour atteindre des niveaux de qualité incomparables.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 col-md-6">
+                            <div class="feature">
+                                <div class="icon">
+                                    <i class="fa-regular fa-heart fa-3x" data-aos="zoom-in" style="color: #800000;"></i>
+                                </div>
+                                <h3>Passion</h3>
+                                <p>Laissez vous envôuter par la passion palpable qui se dégage de nos créations , témoignant de l'enguagement profond de nos  artistes envers leur métier.</p>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-6">
+                            <div class="feature">
+                                <div class="icon">
+                                    <i class="fa-regular fa-lightbulb fa-3x" data-aos="zoom-in" style="color: #800000;"></i>
+                                </div>
+                                <h3>Enguagement</h3>
+                                <p>Découvrez des créations façonnées avec enguagement sans faille envers notre vision artistique, ou chaque pièce est reflet de notre déterminaton à créer quelque chose de véritablement exceptionnel.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-5">
+                <div>
+                    <img src="{% static 'img/tabNosy.jpg' %}" alt="" class="img-fluid mt-5 rounded-5 w-75 align-items-center" data-aos="fade-left" >
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="container-fluid">
+        <div class="container pt-5 pb-5">
+            <h1 class="text-center p-2" data-aos="fade-up" >L'artisan numérique derrière notre plateforme.</h1>
+        </div>
+        <div class="pb-4">
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <img src="{% static 'img/moi.jpg' %}" class="img-fluid mb-5 w-75 rounded-circle" data-aos="fade-up" id="avatar" >
+                        <h3 data-aos="fade-up"><a href="#" class="text-danger"><span class="">Aina</span> Keveen</a></h3>
+                        <span class="d-block position mb-4">Devellopeur, Designeur, Programmeur.</span>
+                        <p>Rencontrez les artisans de notre succès - une équipe talentueuse et dévouée , qui partague une vision commune et une désir passionné. .</p>
+                    </div>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+        </div>
+    </section>
+    <section class="container-fluid p-5" id="SectionAjout3">
+        <h1 class="text-center text-white display-1 p-5" data-aos="zoom-in" >Histoire sculptées à la main.</h1>
+    </section>
+    <style>
+        #avatar{
+            transition: 1s all;
+        }
+        #avatar:hover{
+            cursor: pointer;
+            transform: scale(1.2);
+        }
+    </style>
+</main>
+{% endblock container %}
+    

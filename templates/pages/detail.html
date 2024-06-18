@@ -1,0 +1,149 @@
+{% extends "../layouts/base.html" %}
+
+{% load static %}
+
+{% block container %}
+<main>
+    <section class="container-fluid" style="background-color: #800000;">
+        <div class="container">
+            <h1 class="p-5 text-white display-2" data-aos="fade-right" >Information sur l'article</h1>
+        </div>
+    </section>
+    <section class="container-fluid pt-5 pb-5">
+        <div class="container">
+            <div class="bg-white rounded-4 p-3">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="p-4">
+                            <img src="../{{ article.image }}" alt="" class="img-fluid rounded-5">
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="p-4">
+                            <h4 class="p-1">Designation : {{ article.nom }}</h4>
+                            <h4 class="p-1">Categorie : {{ article.categorie }}</h4>
+                            <h4 class="p-1">Materiau : {{ article.materiaux }}</h4>
+                            <h4 class="p-1">Prix : {{ article.prix }} Ar</h4>
+                            {% if article.prix != 0 %}
+                                <h4 class="p-1">Nombre en stock : {{ article.stock }}</h4>
+                            {% else %}
+                            <h4 class="p-1 text-danger">Le stock de ce produit est vide .</h4>
+                            {% endif %}
+                            <h4 class="p-1">Ajouter par : {{ article.artiste }}</h4>
+                            <h4 class="p-1">Fabriquer à : {{ article.lieu }}</h4>
+                            <h4 class="p-1">Desciption :</h4>
+                            <input type="text" value="{{ article.description }}" class="form-control" readonly>
+                            <h4 class="p-1">Date ajout : {{ article.date_ajout }}</h4>
+                            {% if user.is_authenticated %}
+                            {% if article.stock != 0 %}
+                            <a href="{% url 'addpannier' article.id %}" style="text-decoration: none;">
+                                <button type="text" class="btn btn-lg btn-primary mt-2">
+                                    <i class="fa-solid fa-basket-shopping"></i>  Ajouter au pannier
+                                </button>
+                            </a>
+                            {% endif %}
+                            {% endif %}
+                            {% if user.is_authenticated %}
+                                {% if is_moderator %}
+                                    <a href="{% url 'update' article.id %}" style="text-decoration: none;">
+                                        <button type="text" class="btn btn-lg btn-warning mt-2">
+                                            <i class="fa-solid fa-pencil"></i>  Modification</button>
+                                    </a>
+                                    <a href="{% url 'remove_produit' article.id %}" style="text-decoration: none;">
+                                        <button type="text" class="btn btn-lg btn-danger mt-2">
+                                            <i class="fa-solid fa-trash"></i>  Retirer</button>
+                                    </a>
+                                {% endif %}
+                            {% endif %}
+                            {% if user.is_authenticated %}
+                            <a href="{% url 'ajouterFavorie' article.id %}" style="text-decoration: none;">
+                                <button type="text" class="btn btn-lg btn-success mt-2">
+                                    <i class="fa-solid fa-heart-circle-plus"></i>
+                                </button>
+                            </a>
+                            <a href="{% url 'removeFavorie' article.id %}" style="text-decoration: none;">
+                                <button type="text" class="btn btn-lg btn-secondary mt-2">
+                                    <i class="fa-solid fa-heart-circle-minus"></i>
+                                </button>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section style="background-color: white;" class="container-fluid">
+        <div class="container">
+            <h1 class="pt-4 text-center">Ajouter un commentaire sur le produit </h1>
+                {% if message %}
+                    <h3 class="text-success">{{ message }}</h3>
+                {% endif %}
+            {% if user.is_authenticated %}
+            <form action="{% url 'commenter' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" name="id_membre" value="{{ user.id }}" class="form-control" readonly>
+                <input type="hidden" name="id_produit" value="{{ article.id }}" class="form-control" readonly>
+                <textarea name="coms" id="" cols="30" rows="5" class="form-control mt-5 mb-5" placeholder="Votre commentaire ..." required></textarea>
+                <p class="text-center">
+                    <button type="submit" class="btn btn-success btn-lg mt-1 mb-4" data-aos="fade-up">
+                        <i class="fa-solid fa-globe p-2"></i>
+                        Mettre en ligne
+                    </button>
+                </p>
+            </form>
+            {% else %}
+                <h1 class="text-center text-warning display-3 p-5">Veuillez vous connecter pour faire un commentaire . SVP !</h1>
+            {% endif %}
+        </div>
+    </section>
+    <div class="client_section layout_padding">
+        <div class="container pb-5">
+           <div class="row">
+              <div class="col-sm-12">
+                <h1 class="text-center">Zones des commentaires</h1>
+                <h2 class="client_taital">Commentaire{{ content.coms|pluralize }} : {{ content.coms | length}}</h2>
+              </div>
+           </div>
+        </div>
+    </div>
+    <section class="testimonial-section before-footer-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="testimonial-slider-wrap text-center">
+                        <div id="testimonial-nav">
+                            <span class="prev" data-controls="prev"><span class="fa fa-chevron-left" hidden></span></span>
+                            <span class="next" data-controls="next"><span class="fa fa-chevron-right" hidden></span></span>
+                        </div>
+                        <div class="testimonial-slider">
+                            {% for commentaire in content.coms %}
+                            <div class="item bg-white mb-5 p-2 rounded-2">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-8 mx-auto">
+                                        <div class="testimonial-block text-center">
+                                            <blockquote class="m-3">
+                                                <h1>{{ commentaire.3 }}</h1>
+                                            </blockquote>
+                                            <div class="author-info">
+                                                <div class="author-pic">
+                                                    <img src="../{{ commentaire.20 }}" alt="" class="img-fluid rounded-circle" width="100" height="100">
+                                                </div>
+                                                <h3 class="font-weight-bold">{{commentaire.9}}</h3>
+                                                <span class="position d-block mb-3">{{ commentaire.4 }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+</main>
+{% endblock container %}
+    

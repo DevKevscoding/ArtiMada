@@ -1,0 +1,89 @@
+{% load static %}
+<footer>
+    <div class="container pt-5">
+        <div class="row">
+            <div class="col-md-4">
+                <div>
+                    <h1 class="text-black pb-3" data-aos="fade-up" ><span style="color: #800000;"><img src="{% static 'img/baobab.png' %}" alt="" class="img-fluid" width="50" height="50" style="margin-top: -10px;">Arti</span>Mada<span>.</span></h1>
+                    <span>Merci de visiter notre site dédié au art malagasy. <br>Nous espérons que vous avez apprécié votre exploration de nos collections et découverts artistiques.</span>
+                    <ul class="list-unstyled d-flex pt-3">
+                        <li class="p-3">
+                            <a href="https://www.facebook.com/aina.raolimanana" target="_blank" style="color: #800000;">
+                                <i class="fa-brands fa-facebook fa-2x" data-aos="fade-up"
+                                data-aos-duration="1000" ></i>
+                            </a>
+                        </li>
+                        <li class="p-3" >
+                            <a href="https://www.linkedin.com" class="pt-3" style="color: #800000;" >
+                                <i class="fa-brands fa-linkedin fa-2x" data-aos="fade-up"
+                                data-aos-duration="1500"></i>
+                            </a>
+                        </li>
+                        <li class="p-3">
+                            <a href="https://www.instagram.com" style="color: #800000;" >
+                                <i class="fa-brands fa-instagram fa-2x" data-aos="fade-up"
+                                data-aos-duration="2000"></i>
+                            </a>
+                        </li>
+                        <li class="p-3">
+                            <a href="https://www.google.com" style="color: #800000;" >
+                                <i class="fa-brands fa-google fa-2x" data-aos="fade-up"
+                                data-aos-duration="2500"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3 pt-5">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="p-3">
+                            <ul class="list-unstyled">
+                                <li class="mb-3">
+                                    <a href="{% url 'pageAcceuil' %}" class="text-black fs-6 link_footer" style="text-decoration: none;">Accueuil</a>
+                                </li>
+                                <li class="mb-3">
+                                    <a href="{% url 'produits' %}" class="text-black fs-6 link_footer" style="text-decoration: none;">Produit</a>
+                                <li class="mb-3">
+                                    <a href="{% url 'about' %}" class="text-black fs-6 link_footer" style="text-decoration: none;">Apropos</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="p-3">
+                            <ul class="list-unstyled">
+                                {% if user.is_authenticated %}
+                                    {% if is_moderator %}
+                                    <li class="mb-3">
+                                        <a href="{% url 'ajout' %}" class="text-black fs-6 link_footer" style="text-decoration: none;">Mise en ligne</a>
+                                    </li>
+                                    {% endif %}
+                                {% endif %}
+                                <li class="mb-3">
+                                    <a href="{% url 'blog' %}" class="text-black fs-6 link_footer" style="text-decoration: none;">Blog</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'contact' %}" class="text-black fs-6 link_footer" style="text-decoration: none;">Contact</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <h2 class="text-center mb-3">Conclusion</h2>
+                <p>Explorez l'art malagasy avec nous et laissez-vous inspirer par la beauté intemporelle de Madagasikara.<br>Merci de nous avoir rejoint dans cette aventure artistique !</p>
+                <p>Restez connecté avec nous pour les dernières mise à jour et nouveautés.</p>
+            </div>
+        </div>
+        <h6 class="m-3 text-center pb-2">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash; Designed by Aina Keveen (Kevs)
+        </h6>
+    </div>
+</footer>
+<style>
+    .link_footer:hover {
+        transition:  2s all;
+        color: #800000 !important;
+    }
+</style>
